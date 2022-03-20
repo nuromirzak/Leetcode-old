@@ -1,13 +1,15 @@
 class Solution {
-    public int lengthOfLastWord(String s) {
-        int res = 0;
-        for (int i = s.length() - 1; i >= 0; i--) {
-            if (s.charAt(i) != ' ') {
-                res++;
-            } else if (res > 0) {
-                break;
+    public int maxSubArray(int[] nums) {
+        int[] dp = new int[nums.length];
+        dp[0] = nums[0];
+        int sum = dp[0];
+        for (int i = 1; i < nums.length; i++) {
+            dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
+
+            if (dp[i] > sum) {
+                sum = dp[i];
             }
         }
-        return res;
+        return sum;
     }
 }
